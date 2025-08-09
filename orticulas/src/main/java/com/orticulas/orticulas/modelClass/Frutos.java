@@ -14,6 +14,7 @@ public class Frutos {
     private Long id;
     @Column(name = "NOME_POPULAR")
     private String nomePopular;
+    @Column(name = "NOME_CIENTIFICO")
     private String nomeCientifico;
     private String descricao;
     @Lob
