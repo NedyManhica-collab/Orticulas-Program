@@ -16,6 +16,7 @@ public class Frutos {
     private String nomePopular;
     @Column(name = "NOME_CIENTIFICO")
     private String nomeCientifico;
+    @Lob
     private String descricao;
     @Lob
     private byte[] imagem;
