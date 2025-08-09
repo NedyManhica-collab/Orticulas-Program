@@ -2,14 +2,17 @@ package com.orticulas.orticulas.modelClass;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 @Entity
 public class Frutos {
     
     @Id
     private Long id;
+    @Column(name = "NOME_POPULAR")
     private String nomePopular;
     private String nomeCientifico;
     private String descricao;
