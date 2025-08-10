@@ -12,12 +12,7 @@ import com.orticulas.orticulas.modelClass.Bulbos;
 public class BulbosService {
 
     @Autowired
-    private final BulbosRepository bulbosRepository;
-
-    public BulbosService(BulbosRepository bulbosRepository){
-
-        this.bulbosRepository = bulbosRepository;
-    }
+    private  BulbosRepository bulbosRepository;
 
     public Bulbos buscarPorId(Long id){
 

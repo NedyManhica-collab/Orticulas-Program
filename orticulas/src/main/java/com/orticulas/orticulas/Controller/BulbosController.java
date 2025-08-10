@@ -21,7 +21,7 @@ public class BulbosController {
 //Este método é responsável por listar os bulbos, podendo filtrar por nome popular ou científico.
 //Caso o parâmetro "nome" seja fornecido, ele busca os bulbos que contêm esse nome em qualquer um dos campos.
 //Se o parâmetro não for fornecido, ele lista todos os bulbos disponíveis.
-    @GetMapping("/Bulbod")
+    @GetMapping("/listar")
     public String listarBulbos(@RequestParam(value = "nome", required = false) String nome, Model model){
         if(nome != null && !nome.isEmpty()){
             model.addAttribute("bulbos", bulbosService.buscar(nome));
@@ -38,6 +38,8 @@ public class BulbosController {
         model.addAttribute("bulbos", new Bulbos());
         return "bulbos/registrarBulbos";
     }
+//Este método processa o registro de um novo bulbo.
+//use essa requisição para salvar um bulbo no banco de dados no html
     @PostMapping("/salvar")
     public String salvarBulbos(Bulbos bulbos, Model model){
         try {
@@ -46,9 +48,10 @@ public class BulbosController {
         } catch (IllegalArgumentException e) {
             model.addAttribute("mensagem", e.getMessage());
         }
-        return "redirect:/bulbos/Bulbos";
+        return "bulbos/Bulbos";
     }
 // Exibe o formulário de edição
+//aqui voce recebe o formulário de edição do bulbo com os respectivos dados para depos chamar o method atualizarBulbo
 @GetMapping("/editar")
 public String editarBulbo(@RequestParam("id") Long id, Model model) {
     Bulbos bulbo = bulbosService.buscarPorId(id);
@@ -56,7 +59,7 @@ public String editarBulbo(@RequestParam("id") Long id, Model model) {
     return "bulbos/editarBulbo";
 }
 
-// Processa a atualização
+// Processa a atualização e Actlualiza o bulbo no banco de dados
 @PostMapping("/atualizar")
 public String atualizarBulbo(@RequestParam("id") Long id, Bulbos bulbos, Model model) {
     try {
@@ -65,6 +68,6 @@ public String atualizarBulbo(@RequestParam("id") Long id, Bulbos bulbos, Model m
     } catch (IllegalArgumentException e) {
         model.addAttribute("mensagem", e.getMessage());
     }
-    return "redirect:/bulbos/Bulbod";
+    return "redirect:/bulbos/bulbos";
 }
 }
