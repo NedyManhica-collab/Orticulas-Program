@@ -2,6 +2,7 @@ package com.orticulas.orticulas.modelClass;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Base64;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +32,9 @@ public class Bulbos {
     @Column(name = "ESTADO")
     private String estado;
     
+    String base64Imagem = null;
+   
+
     public Bulbos() {
     }
     public Bulbos(Long id, String nomePopular, String nomeCientifico, String descricao, byte[] imagem, BigDecimal preco, LocalDate dataColheita, String estado) {
@@ -73,6 +77,12 @@ public class Bulbos {
     public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
+    public String getBase64Imagem() {
+        if (this.imagem != null) {
+            return Base64.getEncoder().encodeToString(this.imagem);
+        }
+        return null;
+    }
     public BigDecimal getPreco() {
         return preco;
     }
@@ -91,5 +101,6 @@ public class Bulbos {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
+
 }

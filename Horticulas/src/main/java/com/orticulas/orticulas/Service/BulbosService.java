@@ -49,7 +49,6 @@ public class BulbosService {
         throw new IllegalArgumentException("O estado não pode ser vazio.");
     }
 
-    
     return bulbosRepository.save(bulbos);
 }
 
@@ -82,9 +81,14 @@ public class BulbosService {
 
         return bulbosRepository.save(bulbos);
     }
-    public void deletar(Long id){
 
-        bulbosRepository.deleteById(id);
+    public void deletar(Long id)
+    {
+        if (!bulbosRepository.existsById(id)) {
+            throw new IllegalArgumentException("Bulbo não encontrado com o ID: " + id);
+        }else{
+            bulbosRepository.deleteById(id);
+        }
     }
     
 }

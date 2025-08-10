@@ -89,11 +89,12 @@
                 <td th:text="${bulbo.nomeCientifico}">Allium sativum</td>
                 <td th:text="${bulbo.descricao}">Descrição</td>
                 <td>
-                    <img th:if="${bulbo.imagem != null}" 
-                         th:src="'data:image/jpeg;base64,' + ${T(org.apache.tomcat.util.codec.binary.Base64).encodeBase64String(bulbo.imagem)}" 
-                         alt="Imagem do bulbo" style="max-height: 100px;" />
-                    <span th:if="${bulbo.imagem == null}">Sem imagem</span>
-                </td>
+                    <img th:if="${bulbo.base64Imagem != null}"
+                            th:src="'data:image/jpeg;base64,' + ${bulbo.base64Imagem}"
+                            alt="Imagem do bulbo" style="max-height: 100px;" />
+                    <span th:if="${bulbo.base64Imagem == null}">Sem imagem</span>
+                    </td>
+
                 <td th:text="${bulbo.preco}">10.50</td>
                 <td th:text="${bulbo.dataColheita}">2025-08-10</td>
                 <td th:text="${bulbo.estado}">Disponível</td>
