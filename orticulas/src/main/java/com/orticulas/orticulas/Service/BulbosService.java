@@ -1,8 +1,10 @@
 package com.orticulas.orticulas.Service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.orticulas.orticulas.Repository.BulbosRepository;
 import com.orticulas.orticulas.modelClass.Bulbos;
 
@@ -15,6 +17,11 @@ public class BulbosService {
     public BulbosService(BulbosRepository bulbosRepository){
 
         this.bulbosRepository = bulbosRepository;
+    }
+
+    public Bulbos buscarPorId(Long id){
+
+        return bulbosRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Bulbo não encontrado com o ID: " + id));
     }
 
     public List<Bulbos> buscar(String nome){
