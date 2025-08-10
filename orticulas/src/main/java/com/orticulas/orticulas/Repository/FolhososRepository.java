@@ -9,6 +9,6 @@ import com.orticulas.orticulas.modelClass.Folhosas;
 @Repository
 public interface FolhososRepository extends JpaRepository<Folhosas, Long> {
   
-     List<Folhosas> findByNomePopularContainigIgnoreCaseNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
+     List<Folhosas> findByNomePopularContainingIgnoreCaseAndNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
     
 }

@@ -9,6 +9,6 @@ import com.orticulas.orticulas.modelClass.Frutos;
 
 @Repository
 public interface FrutosRepository  extends JpaRepository<Frutos, Long> {
-     List<Frutos> findByNomePopularContainigIgnoreCaseNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
+     List<Frutos> findByNomePopularContainingIgnoreCaseAndNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
     
 }

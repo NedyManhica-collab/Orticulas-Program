@@ -9,6 +9,6 @@ import com.orticulas.orticulas.modelClass.Pimentas;
 @Repository
 public interface PimentasRepository extends JpaRepository<Pimentas, Long> {
    
-     List<Pimentas> findByNomePopularContainigIgnoreCaseNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
+     List<Pimentas> findByNomePopularContainingIgnoreCaseAndNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
     
 }

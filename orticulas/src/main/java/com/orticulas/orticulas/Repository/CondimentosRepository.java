@@ -8,6 +8,6 @@ import com.orticulas.orticulas.modelClass.CondimentosVerdes;
 
 @Repository
 public interface CondimentosRepository extends JpaRepository<CondimentosVerdes, Long> {
-     List<CondimentosVerdes> findByNomePopularContainigIgnoreCaseNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
+     List<CondimentosVerdes> findByNomePopularContainingIgnoreCaseAndNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
     
 }

@@ -9,6 +9,7 @@ import com.orticulas.orticulas.modelClass.Bulbos;
 
 @Repository
 public interface BulbosRepository extends JpaRepository<Bulbos, Long> {
-    List<Bulbos> findByNomePopularContainigIgnoreCaseNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
-    
+
+List<Bulbos> findByNomePopularContainingIgnoreCaseAndNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
 }
+

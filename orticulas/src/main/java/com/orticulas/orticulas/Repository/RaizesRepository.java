@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.orticulas.orticulas.modelClass.Raizes;
 @Repository
 public interface RaizesRepository extends JpaRepository<Raizes, Long> {
-     List<Raizes> findByNomePopularContainigIgnoreCaseNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
+     List<Raizes> findByNomePopularContainingIgnoreCaseAndNomeCientificoContainingIgnoreCase(String nomePopular, String nomeCientifico);
     
 }

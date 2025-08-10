@@ -21,7 +21,7 @@ public class BulbosService {
 
     public List<Bulbos> buscar(String nome){
 
-        return bulbosRepository.findByNomePopularContainigIgnoreCaseNomeCientificoContainingIgnoreCase(nome, nome);
+        return bulbosRepository.findByNomePopularContainingIgnoreCaseAndNomeCientificoContainingIgnoreCase(nome, nome);
     }
     public List<Bulbos> listarBulbos(){
 
