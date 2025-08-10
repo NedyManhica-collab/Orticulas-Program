@@ -1,5 +1,6 @@
 package com.orticulas.orticulas.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +29,30 @@ public class BulbosService {
         return bulbosRepository.findAll();
     }
 
-    public Bulbos salvar(Bulbos bulbos){
-
-        if(bulbos.getNomePopular() == null || bulbos.getNomePopular().isEmpty()){
-            throw new IllegalArgumentException("O nome popular não pode ser vazio.");
-        }
-        if(bulbos.getNomeCientifico() == null || bulbos.getNomeCientifico().isEmpty()){
-            throw new IllegalArgumentException("O nome científico não pode ser vazio.");
-        }
-
-        return bulbosRepository.save(bulbos);
+    public Bulbos salvar(Bulbos bulbos) {
+    if (bulbos.getNomePopular() == null || bulbos.getNomePopular().trim().isEmpty()) {
+        throw new IllegalArgumentException("O nome popular não pode ser vazio.");
     }
+    if (bulbos.getNomeCientifico() == null || bulbos.getNomeCientifico().trim().isEmpty()) {
+        throw new IllegalArgumentException("O nome científico não pode ser vazio.");
+    }
+    if (bulbos.getDescricao() == null || bulbos.getDescricao().trim().isEmpty()) {
+        throw new IllegalArgumentException("A descrição não pode ser vazia.");
+    }
+    if (bulbos.getPreco() == null || bulbos.getPreco().compareTo(BigDecimal.ZERO) <= 0) {
+        throw new IllegalArgumentException("O preço deve ser maior que zero.");
+    }
+    if (bulbos.getDataColheita() == null) {
+        throw new IllegalArgumentException("A data da colheita é obrigatória.");
+    }
+    if (bulbos.getEstado() == null || bulbos.getEstado().trim().isEmpty()) {
+        throw new IllegalArgumentException("O estado não pode ser vazio.");
+    }
+
+    
+    return bulbosRepository.save(bulbos);
+}
+
     public Bulbos atualizar(Long id, Bulbos bulbosAtualizado){
 
       Bulbos bulbos = bulbosRepository.findById(id)

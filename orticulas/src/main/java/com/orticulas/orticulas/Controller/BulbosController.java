@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orticulas.orticulas.Service.BulbosService;
 import com.orticulas.orticulas.modelClass.Bulbos;
@@ -28,6 +29,7 @@ public class BulbosController {
         }else{
             model.addAttribute("bulbos", bulbosService.listarBulbos());
         }
+        model.addAttribute("bulbo",new Bulbos());
         model.addAttribute("nome", nome);
         return "bulbos/bulbos";
        
@@ -40,16 +42,27 @@ public class BulbosController {
     }
 //Este método processa o registro de um novo bulbo.
 //use essa requisição para salvar um bulbo no banco de dados no html
-    @PostMapping("/salvar")
-    public String salvarBulbos(Bulbos bulbos, Model model){
-        try {
-            bulbosService.salvar(bulbos);
-            model.addAttribute("mensagem", "Bulbo salvo com sucesso!");
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("mensagem", e.getMessage());
+
+@PostMapping("/salvar")
+public String salvarBulbos(Bulbos bulbos,
+                          @RequestParam("fileImagem") MultipartFile imagemFile,
+                          Model model) {
+    try {
+        if (!imagemFile.isEmpty()) {
+            bulbos.setImagem(imagemFile.getBytes());
+        } else {
+            bulbos.setImagem(null);
         }
-        return "bulbos/Bulbos";
+        bulbosService.salvar(bulbos);
+        model.addAttribute("mensagem", "Bulbo salvo com sucesso!");
+    } catch (Exception e) {
+        model.addAttribute("mensagem", "Erro ao salvar bulbo: " + e.getMessage());
     }
+    return "redirect:/bulbos/listar";
+}
+
+
+
 // Exibe o formulário de edição
 //aqui voce recebe o formulário de edição do bulbo com os respectivos dados para depos chamar o method atualizarBulbo
 @GetMapping("/editar")
