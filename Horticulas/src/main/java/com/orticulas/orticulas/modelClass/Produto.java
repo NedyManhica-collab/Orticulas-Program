@@ -2,25 +2,39 @@ package com.orticulas.orticulas.modelClass;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Id;
+import java.util.Base64;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+
 @Entity
-public class Folhosas {
+public class Produto {
+
     @Id
+    @Column(name = "NOME_DO_PRODUTO_ID")
     private Long id;
+    @Column(name = "NOME_POPULAR")
     private String nomePopular;
+    @Column(name = "NOME_CIENTIFICO")
     private String nomeCientifico;
+    @Lob
+    @Column(name = "DESCRICAO")
     private String descricao;
     @Lob
+    @Column(name = "IMAGEM")
     private byte[] imagem;
+    @Column(name = "PRECO")
     private BigDecimal preco;
+    @Column(name = "DATA_COLHEITA")
     private LocalDate dataColheita;
+    @Column(name = "ESTADO")
     private String estado;
-
-    public Folhosas() {
+    
+    public Produto() {
     }
-    public Folhosas(Long id, String nomePopular, String nomeCientifico, String descricao, byte[] imagem, BigDecimal preco, LocalDate dataColheita, String estado) {
+    public Produto(Long id, String nomePopular, String nomeCientifico, String descricao, byte[] imagem, BigDecimal preco, LocalDate dataColheita, String estado) {
         this.id = id;
         this.nomePopular = nomePopular;
         this.nomeCientifico = nomeCientifico;
@@ -60,6 +74,12 @@ public class Folhosas {
     public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
+    public String getBase64Imagem() {
+        if (this.imagem != null) {
+            return Base64.getEncoder().encodeToString(this.imagem);
+        }
+        return null;
+    }
     public BigDecimal getPreco() {
         return preco;
     }
@@ -78,5 +98,6 @@ public class Folhosas {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
+
 }
