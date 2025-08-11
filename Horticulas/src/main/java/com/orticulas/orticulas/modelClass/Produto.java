@@ -2,7 +2,6 @@ package com.orticulas.orticulas.modelClass;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Base64;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,7 +11,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter 
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Produto {
 
@@ -46,74 +53,5 @@ public class Produto {
 
     @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL)
     private Estoque estoque;
-
-    
-    public Produto() {
-    }
-    public Produto(Long id, String nomePopular, String nomeCientifico, String descricao, byte[] imagem, BigDecimal preco, LocalDate dataColheita, String estado) {
-        this.id = id;
-        this.nomePopular = nomePopular;
-        this.nomeCientifico = nomeCientifico;
-        this.descricao = descricao;
-        this.imagem = imagem;
-        this.preco = preco;
-        this.dataColheita = dataColheita;
-        this.estado = estado;
-    }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getNomePopular() {
-        return nomePopular;
-    }
-    public void setNomePopular(String nomePopular) {
-        this.nomePopular = nomePopular;
-    }
-    public String getNomeCientifico() {
-        return nomeCientifico;
-    }
-    public void setNomeCientifico(String nomeCientifico) {
-        this.nomeCientifico = nomeCientifico;
-    }
-    public String getDescricao() {
-        return descricao;
-    }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    public byte[] getImagem() {
-        return imagem;
-    }
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
-    }
-    public String getBase64Imagem() {
-        if (this.imagem != null) {
-            return Base64.getEncoder().encodeToString(this.imagem);
-        }
-        return null;
-    }
-    public BigDecimal getPreco() {
-        return preco;
-    }
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
-    }
-    public LocalDate getDataColheita() {
-        return dataColheita;
-    }
-    public void setDataColheita(LocalDate dataColheita) {
-        this.dataColheita = dataColheita;
-    }
-    public String getEstado() {
-        return estado;
-    }
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
 
 }

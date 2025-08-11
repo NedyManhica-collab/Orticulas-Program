@@ -7,7 +7,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter 
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Fornecedor {
 
@@ -27,41 +35,5 @@ public class Fornecedor {
      @OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL)
     private List<Produto> produtos;
 
-    public Fornecedor() {
-    }
-    public Fornecedor(Long id, String nomeFornecedor, String contato, String endereco) {
-        this.id = id;
-        this.nomeFornecedor = nomeFornecedor;
-        this.contato = contato;
-        this.endereco = endereco;
-    }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getNomeFornecedor() {
-        return nomeFornecedor;
-    }
-    public void setNomeFornecedor(String nomeFornecedor) {
-        this.nomeFornecedor = nomeFornecedor;
-    }
-    public String getContato() {
-        return contato;
-    }
-    public void setContato(String contato) {
-        this.contato = contato;
-    }
-    public String getEndereco() {
-        return endereco;
-    }
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    
-
-    
 
 }
