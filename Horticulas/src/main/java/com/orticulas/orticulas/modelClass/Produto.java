@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
@@ -24,6 +26,7 @@ import lombok.Setter;
 public class Produto {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "NOME_DO_PRODUTO_ID")
     private Long id;
     @Column(name = "NOME_POPULAR")
@@ -34,8 +37,8 @@ public class Produto {
     @Column(name = "DESCRICAO")
     private String descricao;
     @Lob
-    @Column(name = "IMAGEM")
-    private byte[] imagem;
+    @Column(name = "URL_IMAGEM")
+    private String UrlImagem;
     @Column(name = "PRECO")
     private BigDecimal preco;
     @Column(name = "DATA_COLHEITA")

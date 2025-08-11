@@ -31,6 +31,5 @@ public class Estoque {
       @OneToOne
     @JoinColumn(name = "produto_id")
     private Produto produto;
-
-   
+ 
 }

@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.orticulas.orticulas.modelClass.Produto;
 
-
-
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 

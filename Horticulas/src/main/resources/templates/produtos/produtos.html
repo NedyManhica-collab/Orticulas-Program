@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestão de Produtos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 40px;
+        }
+        .table img {
+            max-height: 50px;
+            border-radius: 5px;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .btn-custom {
+            border-radius: 20px;
+        }
+        .form-control {
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">📦 Gestão de Produtos</h2>
+
+    <!-- Mensagem -->
+    <div th:if="${mensagem}" class="alert alert-info" th:text="${mensagem}"></div>
+
+    <!-- Formulário de Pesquisa -->
+    <form class="d-flex mb-4" th:action="@{/produtos/listar}" method="get">
+        <input type="text" class="form-control me-2" name="nome" placeholder="Pesquisar por nome" th:value="${nome}">
+        <button type="submit" class="btn btn-primary btn-custom">🔍 Pesquisar</button>
+    </form>
+
+    <div class="card p-4 mb-4">
+        <h5>Adicionar / Editar Produto</h5>
+        <form th:action="@{/produtos/salvar}" method="post" th:object="${produto}">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="mb-3">
+                <label class="form-label">Nome Popular</label>
+                <input type="text" class="form-control" th:field="*{nomePopular}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Nome Científico</label>
+                <input type="text" class="form-control" th:field="*{nomeCientifico}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Descrição</label>
+                <textarea class="form-control" th:field="*{descricao}" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">URL da Imagem</label>
+                <input type="text" class="form-control" th:field="*{urlImagem}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Preço</label>
+                <input type="number" step="0.01" class="form-control" th:field="*{preco}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Data de Colheita</label>
+                <input type="date" class="form-control" th:field="*{dataColheita}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Estado</label>
+                <input type="text" class="form-control" th:field="*{estado}">
+            </div>
+
+            <button type="submit" class="btn btn-success btn-custom">💾 Salvar</button>
+        </form>
+    </div>
+
+    <!-- Tabela de Produtos -->
+    <div class="card p-4">
+        <h5>Lista de Produtos</h5>
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome Popular</th>
+                    <th>Nome Científico</th>
+                    <th>Preço</th>
+                    <th>Data Colheita</th>
+                    <th>Imagem</th>
+                    <th>Estado</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${produtos}">
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.nomePopular}"></td>
+                    <td th:text="${p.nomeCientifico}"></td>
+                    <td th:text="${#numbers.formatDecimal(p.preco, 2, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${p.dataColheita}"></td>
+                    <td>
+                        <img th:if="${p.urlImagem}" th:src="${p.urlImagem}" alt="Imagem Produto">
+                    </td>
+                    <td th:text="${p.estado}"></td>
+                    <td>
+                        <a th:href="@{/produtos/editar(id=${p.id})}" class="btn btn-warning btn-sm btn-custom">✏️ Editar</a>
+                        <a th:href="@{/produtos/excluir(id=${p.id})}" class="btn btn-danger btn-sm btn-custom"
+                           onclick="return confirm('Tem certeza que deseja excluir?')">🗑 Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
