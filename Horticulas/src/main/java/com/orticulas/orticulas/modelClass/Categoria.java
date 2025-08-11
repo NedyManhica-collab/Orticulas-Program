@@ -1,8 +1,12 @@
 package com.orticulas.orticulas.modelClass;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Categoria {
@@ -16,6 +20,9 @@ public class Categoria {
 
     @Column(name = "DESCRICAO")
     private String descricao;
+
+      @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    private List<Produto> produtos;
 
     public Categoria() {
     }

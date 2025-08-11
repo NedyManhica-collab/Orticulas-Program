@@ -4,10 +4,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Base64;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Produto {
@@ -31,6 +35,18 @@ public class Produto {
     private LocalDate dataColheita;
     @Column(name = "ESTADO")
     private String estado;
+
+    @ManyToOne
+    @JoinColumn(name = "CATEGORIA_ID")
+    private Categoria categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "FORNECEDOR_ID")
+    private Fornecedor fornecedor;
+
+    @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL)
+    private Estoque estoque;
+
     
     public Produto() {
     }
